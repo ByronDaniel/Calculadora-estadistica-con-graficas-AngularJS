@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "estadistica"
+    }
+  },
+  "defaultProject": "estadistica",
+  "cli": {
+    "analytics": "1fe2c944-1675-465a-9210-0fa879cbb198"
+  }
 }
