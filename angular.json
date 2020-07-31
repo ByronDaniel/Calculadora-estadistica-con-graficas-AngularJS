@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -119,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "estadistica"
+    }
+  },
+  "defaultProject": "estadistica",
+  "cli": {
+    "analytics": "4d4c3291-e742-464d-a61c-c8f3a1838f53"
+  }
 }
