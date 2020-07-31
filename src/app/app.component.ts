@@ -10,7 +10,7 @@ export class AppComponent {
   valores = [];
   sumatoria= 0;
   agregarValores(valor){
-    this.valores.push(parseInt(valor.value));
+    this.valores.push(parseFloat(valor.value));
     if( valor ) {
       valor.value = "";
     }
