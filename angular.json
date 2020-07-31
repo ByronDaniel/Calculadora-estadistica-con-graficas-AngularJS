@@ -122,12 +122,5 @@
       }
     }
   },
-  "defaultProject": "estadistica",
-  "cli": {
-<<<<<<< HEAD
-    "analytics": "4d4c3291-e742-464d-a61c-c8f3a1838f53"
-=======
-    "analytics": "1fe2c944-1675-465a-9210-0fa879cbb198"
->>>>>>> 2d8a30aa664146d2e72d966f7bd108520b56acf7
-  }
+  "defaultProject": "estadistica"
 }

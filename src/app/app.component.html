@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Frecuencias Absolutas</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,10 +13,10 @@
 </nav>
 <br>
 <div align="center">
-  <div class="input-group mb-3 col-3">
-    <input type="text" class="form-control" placeholder="Dato" aria-label="Recipient's username" aria-describedby="button-addon2">
+  <div class="input-group mb-3 col-6">
+    <input type="text" class="form-control" placeholder="Dato" #valor>
     <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Agregar</button>
+      <button class="btn btn-outline-secondary" type="button" (click)="agregarValores(valor)">Agregar</button>
     </div>
   </div>
 </div>
@@ -34,7 +33,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of [11,24,33,42]; index as i">
+    <tr *ngFor="let item of valores; index as i">
       <th scope="row">{{i+1}}</th>
       <td>{{item}}</td>
       <td></td>
@@ -43,20 +42,3 @@
     </tr>
   </tbody>
 </table>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-  <title>Document sxksmxmsxmsal</title>
-=======
-  <title>Estadistica 23</title>
->>>>>>> afe0df8834f65584534486192ffa090107f11d13
-</head>
-<body>
-  
-</body>
-</html>
->>>>>>> 2d8a30aa664146d2e72d966f7bd108520b56acf7
