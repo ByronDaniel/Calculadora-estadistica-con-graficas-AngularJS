@@ -15,7 +15,14 @@ export class AppComponent {
   frecuenciaRelativa = [];
   frecuenciaRelativaAcumulada = [];
   sumatoria= 0;
+  sumatoriadatos= 0;
+  moda = [];
+  media = 0;
+  mediana = 0;
+  medianados =0;
+  datomediana=0;
   cont=0;
+  modamayor = 0;
   agregarValores(valor){
     this.frecuencia=[];
     this.cont=0;
@@ -55,6 +62,12 @@ export class AppComponent {
           
           this.sumatoria+=this.frecuencia[i];
         }
+        //suma de datos
+        this.sumatoriadatos=0;
+        for(let i=0;i<this.valores.length;i++){
+          
+          this.sumatoriadatos+=this.valores[i];
+        }
         //frecuencia acumulada
       this.frecuenciaAcumulada=[];
       this.frecuenciaAcumulada[0]=this.frecuencia[0];
@@ -63,7 +76,6 @@ export class AppComponent {
       for(let i =1;i<this.frecuencia.length;i++){
         this.frecuenciaAcumulada[i]=this.frecuenciaAcumulada[i-1]+this.frecuencia[i]; 
       }
-      console.log(this.frecuenciaAcumulada)
         //Frecuencia Relativa
     
         for(let i=0;i<this.valoresSinDuplicados.length;i++){
@@ -82,7 +94,25 @@ this.frecuenciaRelativaAcumulada=[];
       for(let i =1;i<this.frecuenciaRelativa.length;i++){
         this.frecuenciaRelativaAcumulada[i]=this.frecuenciaRelativaAcumulada[i-1]+this.frecuenciaRelativa[i]; 
       }
-      console.log(this.frecuenciaRelativaAcumulada)
+      //moda
+      
+      //media
+this.media=this.sumatoriadatos/this.sumatoria;
+      //mediana
+      this.mediana=0;
+      this.datomediana=0;
+
+      if(this.valoresSinDuplicados.length%2==0){
+      this.mediana=(this.valoresSinDuplicados.length)/2;
+      this.datomediana=(this.valoresSinDuplicados[this.mediana-1]+this.valoresSinDuplicados[this.mediana])/2;
+      
+      
+      }else{
+      this.mediana=(this.valoresSinDuplicados.length+1)/2;
+      this.datomediana=this.valoresSinDuplicados[this.mediana-1];
+      }
+}
+
    
   }
     
@@ -91,4 +121,4 @@ this.frecuenciaRelativaAcumulada=[];
   
 
 
-}
+
