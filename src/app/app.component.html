@@ -26,32 +26,35 @@
           </div>
         </li>
   
-        <li class="list-group-item" *ngFor="let item of valores">{{item}}</li>
+        <li class="list-group-item" *ngFor="let item of valoresSinOrden">{{item}}</li>
       </ul>
     </div>
-    <div class="col-10">
-      <table class="table" *ngIf="sumatoria!=0">
+    <div class="col-10" *ngIf="sumatoria!=0">
+      <table class="table table-bordered">
         <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Datos Ordenados</th>
-            <th scope="col">Datos</th>
-            <th scope="col">Frecuencia</th>
-            <th scope="col">Frecuencia Acumulada</th>
-            <th scope="col">Frecuencia Relativa</th>
+          <tr class="static">
+            <th scope="col-2">Xi</th>
+            <th scope="col-2">fi</th>
+            <th scope="col-2">Fi</th>
+            <th scope="col-2">ni</th>
+            <th scope="col-2">Ni</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of valores; index as i">
-            <th scope="row">{{i+1}}</th>
-            <td>{{item}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr class="static" *ngFor="let item of valoresSinDuplicados; index as i" >
+            <th scope="row">{{item}}</th>
+            <td>{{frecuencia[i]}}</td>
+            <td>{{frecuenciaAcumulada[i]}}</td>
+            <td>{{frecuenciaRelativa[i]}}%</td>
+            <td>{{frecuenciaRelativaAcumulada[i]}}%</td>
+    
           </tr>
-          <tr *ngIf="sumatoria!=0">
-            <td>Total</td>
-            <td>{{sumatoria}}</td>
+          <tr class="static">
+            <th scope="row">Total</th>
+            <th>{{sumatoria}}</th>
+            <th>{{sumatoria}}</th>
+            <th>100%</th>
+            <th>100%</th>
           </tr>
         </tbody>
       </table>
