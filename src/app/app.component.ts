@@ -84,7 +84,9 @@ export class AppComponent {
       this.cont = 0;
       for (let j = 0; j < this.valoresSinOrden.length; j++) {
         if (this.valoresSinDuplicados[i] == this.valoresSinOrden[j]) {
-          this.frecuenciaRelativa[i] = this.frecuencia[i] * 100 / this.sumatoria;
+
+          this.frecuenciaRelativa[i] = (Number(this.frecuencia[i] * 100 / this.sumatoria));
+
         }
       }
     }
