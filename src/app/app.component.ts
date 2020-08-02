@@ -24,7 +24,8 @@ export class AppComponent {
   cont = 0;
   modamayor = 0;
   agregarValores(valor) {
-    this.frecuencia = [];
+    if(valor.value!=""){
+      this.frecuencia = [];
     this.cont = 0;
     //Agregar Valores
     this.valoresSinOrden.push(parseFloat(valor.value));
@@ -112,8 +113,8 @@ export class AppComponent {
       this.mediana = (this.valoresSinDuplicados.length + 1) / 2;
       this.datomediana = this.valoresSinDuplicados[this.mediana - 1];
     }
-
-    this.moda = [];
+//moda-marlon
+/*     this.moda = [];
     for (let m = 0; m < this.valoresSinOrden.length; m++) {
       for (let p = m + 1 ; p < this.valoresSinOrden.length; p++) {
         if (this.valoresSinOrden[m] === this.valoresSinOrden[p]) {
@@ -121,11 +122,31 @@ export class AppComponent {
           this.moda.sort((a, b) => a - b);
         }
       }
+    } */
+    this.moda = [];
+    this.modamayor=this.frecuencia[0];
+      for (let m = 0; m < this.frecuencia.length; m++) {
+          if (this.frecuencia[m] > this.modamayor) {
+            this.modamayor=this.frecuencia[m];
+          }
+      }
+      for(let i = 0; i < this.frecuencia.length; i++){
+        if(this.frecuencia[i]===this.modamayor){
+          this.moda.push(this.valoresSinDuplicados[i]);
+        }
+      }
+      console.log(this.modamayor);
     }
+
+    
+    }
+    
+    
+  
   }
 
 
-}
+
 
 
 

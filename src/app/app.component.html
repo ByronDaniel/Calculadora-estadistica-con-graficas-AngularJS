@@ -15,17 +15,13 @@
 <div align="center">
   <div class="row">
     <div class="col-2" >
+      <div class="input-group">
+        <input type="number" class="form-control" placeholder="Dato" #valor>
+        <div class="input-group-append">
+          <button class="btn btn-dark" type="button" (click)="agregarValores(valor)">+</button>
+        </div>
+      </div>
       <ul class="list-group">
-        <li class="list-group-item active">Datos</li>
-        <li class="list-group-item" >
-          <div class="input-group">
-            <input type="number" class="form-control" placeholder="Numero" #valor>
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" (click)="agregarValores(valor)">+</button>
-            </div>
-          </div>
-        </li>
-  
         <li class="list-group-item" *ngFor="let item of valoresSinOrden">{{item}}</li>
       </ul>
     </div>
@@ -56,29 +52,25 @@
             <th>100%</th>
             <th>100%</th>
           </tr>
-          <tr class="static">
-            <th scope="row">Moda</th>
-            <th>{{moda}}</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-          <tr class="static">
-            <th scope="row">Media</th>
-            <th>{{media}}</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-          <tr class="static">
-            <th scope="row">Mediana</th>
-            <th>{{datomediana}}</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
         </tbody>
+
+
       </table>
+      <br>
+<div align="left">
+  <tr class="static">
+    <th scope="row">Media: {{media}}</th>
+  </tr>
+  <tr class="static">
+    <th scope="row">Mediana: {{datomediana}}</th>
+  </tr>
+  <tr class="static">
+    <th scope="row" *ngIf="modamayor==1">No hay moda</th>
+    <th scope="row" *ngIf="modamayor!=1">Moda: {{moda}}</th>
+  </tr>
+</div>
+        
+
     </div>
   </div>
  
