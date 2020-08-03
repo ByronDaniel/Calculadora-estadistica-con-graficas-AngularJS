@@ -27,7 +27,7 @@
           <li class="list-group-item" *ngFor="let item of valoresSinOrden">{{item}}</li>
         </ul>
       </div>
-      <div class="col-10" ><!-- *ngIf="sumatoria>20" -->
+      <div class="col-10" *ngIf="sumatoria>20" ><!-- *ngIf="sumatoria>20" -->
         <table class="table table-bordered" >
           <thead class="thead-dark">
             <tr class="static">
@@ -47,7 +47,7 @@
               <th>{{intervaloSuperior[i]| number:'1.2-2'}}</th>
               <td>{{marcaDeClase[i]| number:'1.2-2'}}</td>
               <td>{{frecuenciaIntervalos[i]}}</td>
-              <td></td>   
+              <td>{{frecuenciaInterAcumulada[i]}}</td>   
               <td></td>
               <td></td>
         

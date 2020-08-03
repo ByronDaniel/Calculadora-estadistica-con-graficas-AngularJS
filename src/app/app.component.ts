@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { empty } from 'rxjs';
+import { isEmptyExpression } from '@angular/compiler';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -39,6 +41,7 @@ export class AppComponent implements OnInit {
   rango = 0;
   clase = 0;
   clase2 = 0;
+  frecuenciaInterAcumulada = [];
   agregarValores(valor) {
     if (valor.value != "") {
       this.frecuencia = [];
@@ -154,6 +157,8 @@ export class AppComponent implements OnInit {
         }
       }
 
+
+
       this.barChartLabels = this.valoresSinDuplicados;
       this.barChartData = [
         { data: this.frecuencia, label: 'frecuencia' },
@@ -165,7 +170,7 @@ export class AppComponent implements OnInit {
 
     this.rango = Math.max.apply(null, this.valoresSinDuplicados) - Math.min.apply(null, this.valoresSinDuplicados);
 
-    this.clase = 1 + (3.322 * Math.log(this.sumatoria));
+    this.clase =1 + (3.322 * Math.log(this.sumatoria)) ;
 
     this.intervaloDeClase = Math.round(this.rango / this.clase);
 
@@ -173,7 +178,7 @@ export class AppComponent implements OnInit {
     this.intervaloSuperior = [];
 
     this.intervaloInferior.push(Math.min.apply(null, this.valoresSinDuplicados));
-    for (let i = 0; i < this.valoresSinDuplicados.length - 1; i++) {
+    for (let i = 0; i < this.valoresSinDuplicados.length; i++) {
       this.intervaloInferior.push(this.valoresSinDuplicados[i] + this.intervaloDeClase);
     }
     for (let i = 1; i < this.intervaloInferior.length; i++) {
@@ -192,12 +197,26 @@ export class AppComponent implements OnInit {
       for (let j = 0; j < this.valoresSinOrden.length; j++) {
         if (this.valoresSinOrden[j] >= this.intervaloInferior[i]&&this.valoresSinOrden[j] < this.intervaloSuperior[i]) {
           this.frecuenciaIntervalos[i] = this.cont += 1;
-        }
-
+        }else if(this.frecuenciaIntervalos[i]===undefined){
+        this.frecuenciaIntervalos[i] = 0;
+      }
+    }}
+    
+    for(let i = 0; i < this.frecuenciaIntervalos.length; i++){
+      if(this.frecuenciaIntervalos[i]===empty){
+        this.frecuenciaIntervalos[i]=0;
       }
     }
+    console.log(this.frecuenciaIntervalos);
+
+    //frecuencia Intervalo acumulada
+this.frecuenciaInterAcumulada = [];
+this.frecuenciaInterAcumulada[0] = this.frecuenciaIntervalos[0];
 
 
+for (let i = 1; i < this.frecuenciaIntervalos.length; i++) {
+  this.frecuenciaInterAcumulada[i] = this.frecuenciaInterAcumulada[i - 1] + this.frecuenciaIntervalos[i];
+}
   }
 
   public barChartOptions: ChartOptions = {
