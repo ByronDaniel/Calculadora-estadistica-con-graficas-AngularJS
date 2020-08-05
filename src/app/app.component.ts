@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   datomediana = 0;
   cont = 0;
   modamayor = 0;
-  intervaloDeClase = 0;
+  amplitud = 0;
   marcaDeClase = [];
   frecuenciaIntervalos = [];
 
@@ -42,6 +42,17 @@ export class AppComponent implements OnInit {
   clase = 0;
   clase2 = 0;
   frecuenciaInterAcumulada = [];
+  frecuenciarelativaMayor20 = [];
+  frecuenciaporcentualMayor20 = [];
+
+  constructor() {
+
+
+  }
+
+  ngOnInit() {
+  }
+
   agregarValores(valor) {
     if (valor.value != "") {
       this.frecuencia = [];
@@ -104,7 +115,7 @@ export class AppComponent implements OnInit {
         for (let j = 0; j < this.valoresSinOrden.length; j++) {
           if (this.valoresSinDuplicados[i] == this.valoresSinOrden[j]) {
 
-            this.frecuenciaRelativa[i] = (Number(this.frecuencia[i] * 100 / this.sumatoria));
+            this.frecuenciaRelativa[i] = (Number(this.frecuencia[i] / this.sumatoria));
 
           }
         }
@@ -113,9 +124,15 @@ export class AppComponent implements OnInit {
       this.frecuenciaRelativaAcumulada = [];
       this.frecuenciaRelativaAcumulada[0] = this.frecuenciaRelativa[0];
 
+      for (let i = 0; i < this.valoresSinDuplicados.length; i++) {
+        this.cont = 0;
+        for (let j = 0; j < this.valoresSinOrden.length; j++) {
+          if (this.valoresSinDuplicados[i] == this.valoresSinOrden[j]) {
 
-      for (let i = 1; i < this.frecuenciaRelativa.length; i++) {
-        this.frecuenciaRelativaAcumulada[i] = this.frecuenciaRelativaAcumulada[i - 1] + this.frecuenciaRelativa[i];
+            this.frecuenciaRelativaAcumulada[i] = (Number((this.frecuencia[i] * 100)/ this.sumatoria));
+
+          }
+        }
       }
       //moda
 
@@ -169,54 +186,90 @@ export class AppComponent implements OnInit {
     }
 
     this.rango = Math.max.apply(null, this.valoresSinDuplicados) - Math.min.apply(null, this.valoresSinDuplicados);
+    console.log("rango"+this.rango)
+    this.clase = 1 + (3.322 * Math.log(this.sumatoria));
+    console.log("clase"+this.clase)
 
-    this.clase =1 + (3.322 * Math.log(this.sumatoria)) ;
-
-    this.intervaloDeClase = Math.round(this.rango / this.clase);
-
+    this.amplitud = Math.round(this.rango / this.clase);
+    console.log("amplitud"+this.amplitud)
+    /*test
+    let diferencia = this.clase * this.amplitud;
+    diferencia = diferencia - this.rango;
+    diferencia = diferencia / 2;
+    console.log(diferencia)
+    */
     this.intervaloInferior = [];
     this.intervaloSuperior = [];
 
-    this.intervaloInferior.push(Math.min.apply(null, this.valoresSinDuplicados));
+    this.intervaloInferior.push(Math.min.apply(null, this.valoresSinDuplicados)); //- diferencia
+
     for (let i = 0; i < this.valoresSinDuplicados.length; i++) {
-      this.intervaloInferior.push(this.valoresSinDuplicados[i] + this.intervaloDeClase);
+      this.intervaloInferior.push(this.valoresSinDuplicados[i] + this.amplitud);
     }
     for (let i = 1; i < this.intervaloInferior.length; i++) {
       this.intervaloSuperior.push(this.intervaloInferior[i]);
     }
-    this.intervaloSuperior.push(this.intervaloInferior[this.intervaloInferior.length - 1] + this.intervaloDeClase);
+    this.intervaloSuperior.push(this.intervaloInferior[this.intervaloInferior.length - 1] + this.amplitud);
     this.marcaDeClase = [];
     for (let i = 0; i < this.intervaloSuperior.length; i++) {
       this.marcaDeClase.push((this.intervaloInferior[i] + this.intervaloSuperior[i]) / 2);
     }
-    this.frecuenciaIntervalos=[];
-     //Frecuencia intervalos
-     this.cont = 0;
-     for (let i = 0; i < this.intervaloInferior.length; i++) {
+    this.frecuenciaIntervalos = [];
+    //Frecuencia intervalos
+    this.cont = 0;
+    for (let i = 0; i < this.intervaloInferior.length; i++) {
       this.cont = 0;
       for (let j = 0; j < this.valoresSinOrden.length; j++) {
-        if (this.valoresSinOrden[j] >= this.intervaloInferior[i]&&this.valoresSinOrden[j] < this.intervaloSuperior[i]) {
+        if (this.valoresSinOrden[j] >= this.intervaloInferior[i] && this.valoresSinOrden[j] < this.intervaloSuperior[i]) {
           this.frecuenciaIntervalos[i] = this.cont += 1;
-        }else if(this.frecuenciaIntervalos[i]===undefined){
-        this.frecuenciaIntervalos[i] = 0;
-      }
-    }}
-    
-    for(let i = 0; i < this.frecuenciaIntervalos.length; i++){
-      if(this.frecuenciaIntervalos[i]===empty){
-        this.frecuenciaIntervalos[i]=0;
+        } else if (this.frecuenciaIntervalos[i] === undefined) {
+          this.frecuenciaIntervalos[i] = 0;
+        }
       }
     }
-    console.log(this.frecuenciaIntervalos);
+
+    for (let i = 0; i < this.frecuenciaIntervalos.length; i++) {
+      if (this.frecuenciaIntervalos[i] === empty) {
+        this.frecuenciaIntervalos[i] = 0;
+      }
+    }
+    //Frecuencia Relativa Mayor 20
+
+    for (let i = 0; i < this.valoresSinDuplicados.length; i++) {
+      this.cont = 0;
+      for (let j = 0; j < this.valoresSinOrden.length; j++) {
+        if (this.valoresSinDuplicados[i] == this.valoresSinOrden[j]) {
+
+          this.frecuenciarelativaMayor20[i] = (Number(this.frecuenciaIntervalos[i] / this.sumatoria));
+
+        }
+      }
+    }
+
+    //Frecuencia Porcentual > 20
+
+    this.frecuenciaporcentualMayor20 = [];
+    this.frecuenciaporcentualMayor20[0] = this.frecuenciarelativaMayor20[0];
+
+      for (let i = 0; i < this.valoresSinDuplicados.length; i++) {
+        this.cont = 0;
+        for (let j = 0; j < this.valoresSinOrden.length; j++) {
+          if (this.valoresSinDuplicados[i] == this.valoresSinOrden[j]) {
+
+            this.frecuenciaporcentualMayor20[i] = (Number((this.frecuenciaIntervalos[i] * 100)/ this.sumatoria));
+
+          }
+        }
+      }
 
     //frecuencia Intervalo acumulada
-this.frecuenciaInterAcumulada = [];
-this.frecuenciaInterAcumulada[0] = this.frecuenciaIntervalos[0];
+    this.frecuenciaInterAcumulada = [];
+    this.frecuenciaInterAcumulada[0] = this.frecuenciaIntervalos[0];
 
 
-for (let i = 1; i < this.frecuenciaIntervalos.length; i++) {
-  this.frecuenciaInterAcumulada[i] = this.frecuenciaInterAcumulada[i - 1] + this.frecuenciaIntervalos[i];
-}
+    for (let i = 1; i < this.frecuenciaIntervalos.length; i++) {
+      this.frecuenciaInterAcumulada[i] = this.frecuenciaInterAcumulada[i - 1] + this.frecuenciaIntervalos[i];
+    }
   }
 
   public barChartOptions: ChartOptions = {
@@ -272,22 +325,6 @@ for (let i = 1; i < this.frecuenciaIntervalos.length; i++) {
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
-
-
-
-
-
-
-
-  constructor() {
-
-
-  }
-
-  ngOnInit() {
-  }
-
-
 
 }
 
