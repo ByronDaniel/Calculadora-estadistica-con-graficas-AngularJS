@@ -30,6 +30,9 @@
       <div class="col-10" *ngIf="sumatoria>20"><!-- *ngIf="sumatoria>20" -->
         <table class="table table-bordered" >
           <thead class="thead-dark">
+            <tr class="static" >
+              <th scope="col-12" colspan="8"> Datos Agrupados</th>
+            </tr>
             <tr class="static">
               <th scope="col-2"> Clase</th>
               <th scope="col-2" colspan="2">Intervalos de Clase</th>
@@ -63,39 +66,48 @@
               <th>1</th>
               <th>100%</th>
             </tr>
-            <div align="left">
-              <h6>
-                Medidas de tendencia central
-              </h6>
-              <tr class="static">
-                <th scope="row">Media: {{media| number:'1.2-2'}}</th>
-              </tr>
-              <tr class="static">
-                <th scope="row">Mediana: {{datomediana}}</th>
-              </tr>
-              <tr class="static">
-                <th scope="row" *ngIf="modamayor==1">No hay moda</th>
-                <th scope="row" *ngIf="modamayor!=1">Moda: {{moda}}</th>
-              </tr>
-            </div>
+            
           </tbody>
-          <div align="left">
-            <tr class="static">
-              <th scope="row">Rango: {{rango}}</th>
-            </tr>
-            <tr class="static">
-              <th scope="row">Clase: {{clase| number:'1.2-2'}}</th>
-            </tr>
-            <tr class="static">
-              <th scope="row">Intervalo de clase: {{amplitud| number:'1.2-2'}}</th>
-            </tr>
-          </div>
+
         
         </table>
+        <div align="left">
+          <h6>
+            Medidas de tendencia central
+          </h6>
+          <tr class="static">
+            <th scope="row">Media: {{media| number:'1.2-2'}}</th>
+          </tr>
+          <tr class="static">
+            <th scope="row">Mediana: {{datomediana}}</th>
+          </tr>
+          <tr class="static">
+            <th scope="row" *ngIf="modamayor==1">No hay moda</th>
+            <th scope="row" *ngIf="modamayor!=1">Moda: {{moda}}</th>
+          </tr>
+        </div>
+        <br>
+        <div align="left">
+          <h6>
+            Intervalo de clase
+          </h6>
+          <tr class="static">
+            <th scope="row">Rango: {{rango}}</th>
+          </tr>
+          <tr class="static">
+            <th scope="row">Clase: {{clase| number:'1.2-2'}}</th>
+          </tr>
+          <tr class="static">
+            <th scope="row">Amplitud: {{amplitud| number:'1.2-2'}}</th>
+          </tr>
+        </div>
       </div>
       <div class="col-10" *ngIf="sumatoria<=20&&sumatoria!=0">
         <table class="table table-bordered">
           <thead class="thead-dark">
+            <tr class="static" >
+              <th scope="col-12" colspan="5"> Datos no agrupados</th>
+            </tr>
             <tr class="static">
               <th scope="col-2"> Xi</th>
               <th scope="col-2">fi</th>
@@ -124,7 +136,7 @@
 
 
         </table>
-        <br>
+
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <button type="button" class="btn btn-secundary" data-toggle="modal" data-target=".bd-example-modal-lg">Ver Grafica de Pastel</button>
           <button type="button" class="btn btn-secundary" data-toggle="modal" data-target=".bd-example-modal-lg2">Ver Grafica de Barras</button>
