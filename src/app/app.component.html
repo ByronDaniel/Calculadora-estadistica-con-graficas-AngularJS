@@ -1,4 +1,5 @@
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-dark
+">
   <a class="navbar-brand" href="#">Frecuencias Absolutas</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,7 +21,8 @@
         <div class="input-group">
           <input type="number" class="form-control" placeholder="Dato" #valor>
           <div class="input-group-append">
-            <button class="btn btn-dark" type="button" (click)="agregarValores(valor)">+</button>
+            <button class="btn btn-dark
+" type="button" (click)="agregarValores(valor)">+</button>
           </div>
         </div>
         <ul class="list-group">
@@ -29,7 +31,8 @@
       </div>
       <div class="col-10" *ngIf="sumatoria>20"><!-- *ngIf="sumatoria>20" -->
         <table class="table table-bordered" >
-          <thead class="thead-dark">
+          <thead class="thead-dark
+">
             <tr class="static" >
               <th scope="col-12" colspan="8"> Datos Agrupados</th>
             </tr>
@@ -71,6 +74,10 @@
 
         
         </table>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <button type="button" class="btn btn-secundary" data-toggle="modal" data-target=".bd-example-modal-lg">Ver Grafica de Pastel</button>
+          <button type="button" class="btn btn-secundary" data-toggle="modal" data-target=".bd-example-modal-lg2">Ver Grafica de Barras</button>
+        </div>
         <div align="left">
           <h6>
             Medidas de tendencia central
@@ -104,7 +111,8 @@
       </div>
       <div class="col-10" *ngIf="sumatoria<=20&&sumatoria!=0">
         <table class="table table-bordered">
-          <thead class="thead-dark">
+          <thead class="thead-dark
+">
             <tr class="static" >
               <th scope="col-12" colspan="5"> Datos no agrupados</th>
             </tr>
@@ -215,7 +223,8 @@
         <div>
         </div>
       </div>
-      <button class="btn btn-primary col-12" (click)="randomize()" align="center">Cambiar Vista</button>
+      <button class="btn btn-dark
+ col-12" (click)="randomize()" align="center">Cambiar Vista</button>
 
     </div>
   </div>
