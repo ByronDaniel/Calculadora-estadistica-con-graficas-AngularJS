@@ -129,7 +129,7 @@ export class AppComponent implements OnInit {
         for (let j = 0; j < this.valoresSinOrden.length; j++) {
           if (this.valoresSinDuplicados[i] == this.valoresSinOrden[j]) {
 
-            this.frecuenciaRelativaAcumulada[i] = (Number((this.frecuencia[i] * 100)/ this.sumatoria));
+            this.frecuenciaRelativaAcumulada[i] = (Number((this.frecuencia[i] * 100) / this.sumatoria));
 
           }
         }
@@ -186,12 +186,12 @@ export class AppComponent implements OnInit {
     }
 
     this.rango = Math.max.apply(null, this.valoresSinDuplicados) - Math.min.apply(null, this.valoresSinDuplicados);
-    console.log("rango"+this.rango)
+    console.log("rango" + this.rango)
     this.clase = 1 + (3.322 * Math.log(this.sumatoria));
-    console.log("clase"+this.clase)
+    console.log("clase" + this.clase)
 
     this.amplitud = Math.round(this.rango / this.clase);
-    console.log("amplitud"+this.amplitud)
+    console.log("amplitud" + this.amplitud)
     /*test
     let diferencia = this.clase * this.amplitud;
     diferencia = diferencia - this.rango;
@@ -251,16 +251,16 @@ export class AppComponent implements OnInit {
     this.frecuenciaporcentualMayor20 = [];
     this.frecuenciaporcentualMayor20[0] = this.frecuenciarelativaMayor20[0];
 
-      for (let i = 0; i < this.valoresSinDuplicados.length; i++) {
-        this.cont = 0;
-        for (let j = 0; j < this.valoresSinOrden.length; j++) {
-          if (this.valoresSinDuplicados[i] == this.valoresSinOrden[j]) {
+    for (let i = 0; i < this.valoresSinDuplicados.length; i++) {
+      this.cont = 0;
+      for (let j = 0; j < this.valoresSinOrden.length; j++) {
+        if (this.valoresSinDuplicados[i] == this.valoresSinOrden[j]) {
 
-            this.frecuenciaporcentualMayor20[i] = (Number((this.frecuenciaIntervalos[i] * 100)/ this.sumatoria));
+          this.frecuenciaporcentualMayor20[i] = (Number((this.frecuenciaIntervalos[i] * 100) / this.sumatoria));
 
-          }
         }
       }
+    }
 
     //frecuencia Intervalo acumulada
     this.frecuenciaInterAcumulada = [];
