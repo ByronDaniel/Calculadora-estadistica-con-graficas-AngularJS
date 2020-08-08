@@ -1,5 +1,5 @@
 import { ExcelService } from './../../services/excel.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { Label } from 'ng2-charts';
 import { ChartType, ChartDataSets, ChartOptions } from 'chart.js';
@@ -14,7 +14,7 @@ declare var $: any;
 })
 export class DataTableComponent implements OnInit {
   
-  valoresSinOrden = [];
+  @Input() valoresSinOrden = [];
   frecuencia = [];
   cont = 0;
   valores = [];
@@ -92,11 +92,6 @@ export class DataTableComponent implements OnInit {
     this.valoresSinOrden.filter = filterValue.trim().toLowerCase();
   }*/
 
-  exportAsXLSX() {
-    //this.exportService.exportToExcel(this.valoresSinOrden.data, 'my_export');
-    this.exportService.exportToExcel(this.valoresSinOrden, 'my_export');
-  }
-
   /*exportAsXLSXField() {
     this.exportService.exportToExcel(this.valoresSinOrden.filteredData, 'my_export');
   }*/
@@ -154,7 +149,6 @@ export class DataTableComponent implements OnInit {
         }
       }
     }
-    console.log(this.diagramadepuntos)
 
     //suma de frecuencia
     this.sumatoria = 0;

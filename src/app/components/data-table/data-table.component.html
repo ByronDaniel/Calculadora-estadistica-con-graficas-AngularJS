@@ -3,7 +3,7 @@
     <div class="col-md-3"></div>
     <div class="alert alert-success col-md-6 text-center" role="alert">
       Puedes Ingresar Valores Manualmente o subir un archivo de Excel<br>
-      <a class ="text-primary" href="">¿Qué debe contener el archivo Excel?</a>
+      <a class ="text-primary" href="" data-toggle="modal" data-target="#modalImagen">¿Qué debe contener el archivo Excel a importar?</a>
     </div>
     <div class="col-md-3"></div>
   </div>
@@ -29,7 +29,7 @@
     </div>
     <div class="col-md-2"></div>
   </div>
-  <div class="row mt-3">
+  <div class="row mt-3" *ngIf="valoresSinOrden.length > 0">
     <div class="col-md-2">
       <h4 class="text-dark text-center">Datos</h4>
       <div class="row m-2">
@@ -153,7 +153,7 @@
         <div class="col-md-3"></div>
       </div>
       <div class="row mb-5">
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
         <button type="button" class="btn btn-warning m-2 col-md" data-toggle="modal" 
           data-target=".bd-example-modal-lg">
             Ver Grafica de Pastel
@@ -164,8 +164,10 @@
         </button>
 
         <button type="button" class="btn btn-primary m-2 col-md" data-toggle="modal" 
-        data-target=".bd-example-modal-lg3">Ver Grafica de Puntos</button>
-        <div class="col-md-3"></div>
+        data-target=".bd-example-modal-lg3">
+        Ver Grafica de Puntos
+        </button>
+        <div class="col-md-2"></div>
       </div>
     </div>
   </div>
@@ -190,9 +192,7 @@
       </div>
     </div>
   </div>
-</div>
-
-    
+</div>    
 
 <div class="modal fade bd-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -242,8 +242,28 @@
         </canvas>
       </div>
     </div>
+  </div>
+</div>
 
-
-
+<!-- Modal -->
+<div class="modal fade" id="modalImagen" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ejemplo de Archivo Excel</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="assets/img/indicacion-excel.png" class="img-fluid" alt="Responsive image">
+      </div>
+      <div class="modal-footer">
+        <div class="col-md-2"></div>
+        <a type="button" class="btn btn-success col-md"
+        href="assets/file/plantilla-para-ingresar-datos.xlsx">Descargar Plantilla</a>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
   </div>
 </div>
