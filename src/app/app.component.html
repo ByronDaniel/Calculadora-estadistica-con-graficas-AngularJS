@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="/">ESTADÍSTICA</a>
+    
     <form class="form-inline">
       <button class="btn btn-outline-warning" (click)="exportAsXLSX()" [disabled]="fileExcel.length < 1">Exportar</button>
     </form>
@@ -11,7 +12,9 @@
 <app-data-table [valoresSinOrden]="fileExcel"></app-data-table>
 
 <footer class="bg-dark">
+
   <div class="container">
+    
     <p class="text-center mt-2">© Studios Copy-Paste. 2020</p>
   </div>
 </footer>

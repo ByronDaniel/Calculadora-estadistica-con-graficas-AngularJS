@@ -89,7 +89,6 @@
         <table class="table" *ngIf="sumatoria >= 20">
           <thead class="thead-dark">
             <tr>
-              <th scope="col" class="text-center">#</th>
               <th scope="col" class="text-center">Clase</th>
               <th scope="col" class="text-center" colspan="2">Intervalo de Clase</th>
               <th scope="col" class="text-center">Marcas de Clase</th>
@@ -145,11 +144,40 @@
             <th scope="row" class="bg-primary text-white">Amplitud</th>
           </tr>
           <tr class="static text-center">
+            <td scope="row">{{maximo}} - {{minimo}} =</td>
+            <td scope="row">1 + 3.332 * log({{sumatoria}}) =</td>
+            <td scope="row">{{rango}} / {{clase}} =</td>
+          </tr>
+          <tr class="static text-center">
             <td scope="row">{{rango}}</td>
-            <td scope="row">{{clase| number:'1.2-2'}}</td>
+            <td scope="row">{{clase}}</td>
             <td scope="row">{{amplitud| number:'1.2-2'}}</td>
           </tr>
+          <tr class="static text-center">
+            <th scope="row" class="bg-primary text-white">Media</th>
+            <th scope="row" class="bg-primary text-white">Mediana</th>
+            <th scope="row" class="bg-primary text-white">Moda</th>
+          </tr>
+          <tr class="static text-center">
+            <td scope="row">{{media| number:'1.2-2'}}</td>
+            <td scope="row"></td>
+            <td scope="row" *ngIf="modaMayor==0">No hay Moda</td>
+            <td scope="row" *ngIf="modaMayor>=1">{{moda}}</td>
+          </tr>
+          <tr class="static text-center">
+            <th scope="row" class="bg-primary text-white">Quartil 1</th>
+            <th scope="row" class="bg-primary text-white">Quartil 2</th>
+            <th scope="row" class="bg-primary text-white">Quartil 3</th>
+          </tr>
+          <tr class="static text-center">
+            <td scope="row"></td>
+            <td scope="row"></td>
+            <td scope="row"></td>
+          </tr>
         </table>
+        
+
+        
         <div class="col-md-3"></div>
       </div>
       <div class="row mb-5">

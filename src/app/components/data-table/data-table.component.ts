@@ -81,7 +81,10 @@ export class DataTableComponent implements OnInit {
   frecuenciaInterAcumulada = [];
   frecuenciarelativaMayor20 = [];
   frecuenciaporcentualMayor20 = [];
-
+calculorango=0;
+exceso=0;
+maximo=0;
+minimo=0;
   constructor( private exportService: ExcelService ) { }
 
   ngOnInit(): void {
@@ -129,6 +132,8 @@ export class DataTableComponent implements OnInit {
   }
 
   calcularTabla(value) {
+    this.maximo=Math.max.apply(null, this.valoresSinDuplicados);
+    this.minimo=Math.min.apply(null, this.valoresSinDuplicados);
     //Ordenar Valores
     this.valores.sort((a, b) => a - b);
       
@@ -235,21 +240,32 @@ export class DataTableComponent implements OnInit {
       this.pieChartData = this.frecuencia;
 
       this.rango = Math.max.apply(null, this.valoresSinDuplicados) - Math.min.apply(null, this.valoresSinDuplicados);
-      this.clase = 1 + (3.322 * Math.log(this.sumatoria));
-      this.amplitud = Math.round(this.rango / this.clase);
+      this.clase = Math.round(1 + (3.332 * Math.log(this.sumatoria)));
+      if(this.clase%2==0){
+        this.clase=this.clase+1;
+      }      
+      this.amplitud = (this.rango / this.clase)+0.2;
+
+
+      this.calculorango=this.clase*this.amplitud;
+
+      if(this.calculorango>this.rango){
+        this.exceso= (this.calculorango-this.rango)/2;
+      }
 
       this.intervaloInferior = [];
       this.intervaloSuperior = [];
 
-      this.intervaloInferior.push(Math.min.apply(null, this.valoresSinDuplicados)); //- diferencia
+      this.intervaloInferior.push(Math.min.apply(null, this.valoresSinDuplicados)-this.exceso); //- diferencia
 
-      for (let i = 0; i < this.valoresSinDuplicados.length; i++) {
-        this.intervaloInferior.push(this.valoresSinDuplicados[i] + this.amplitud);
+      for (let i = 0; i < this.clase-1; i++) {
+        this.intervaloInferior.push(this.intervaloInferior[i] + this.amplitud);
       }
+      console.log(this.intervaloInferior);
       for (let i = 1; i < this.intervaloInferior.length; i++) {
         this.intervaloSuperior.push(this.intervaloInferior[i]);
       }
-      this.intervaloSuperior.push(this.intervaloInferior[this.intervaloInferior.length - 1] + this.amplitud);
+      this.intervaloSuperior.push(this.intervaloSuperior[this.intervaloSuperior.length-1]+this.amplitud+this.exceso);
       this.marcaDeClase = [];
       for (let i = 0; i < this.intervaloSuperior.length; i++) {
         this.marcaDeClase.push((this.intervaloInferior[i] + this.intervaloSuperior[i]) / 2);
