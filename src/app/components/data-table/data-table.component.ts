@@ -81,23 +81,19 @@ export class DataTableComponent implements OnInit {
   frecuenciaInterAcumulada = [];
   frecuenciarelativaMayor20 = [];
   frecuenciaporcentualMayor20 = [];
-calculorango=0;
-exceso=0;
-maximo=0;
-minimo=0;
+  calculorango=0;
+  exceso=0;
+  maximo=0;
+  minimo=0;
+
+  Q1: number = 0;
+  Q2: number = 0;
+  Q3: number = 0;
+
   constructor( private exportService: ExcelService ) { }
 
   ngOnInit(): void {
   }
-
-  /*applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.valoresSinOrden.filter = filterValue.trim().toLowerCase();
-  }*/
-
-  /*exportAsXLSXField() {
-    this.exportService.exportToExcel(this.valoresSinOrden.filteredData, 'my_export');
-  }*/
 
   onFileChange(evt: any) {
     var fileName = evt.target.files[0].name;
@@ -261,7 +257,7 @@ minimo=0;
       for (let i = 0; i < this.clase-1; i++) {
         this.intervaloInferior.push(this.intervaloInferior[i] + this.amplitud);
       }
-      console.log(this.intervaloInferior);
+      
       for (let i = 1; i < this.intervaloInferior.length; i++) {
         this.intervaloSuperior.push(this.intervaloInferior[i]);
       }
@@ -340,6 +336,10 @@ minimo=0;
         { data: this.diagramadepuntos2, label: 'frecuencia - intervalos', pointRadius: 10},
         
       ];
+    
+    //Calculo Cuartiles
+    this.Q1 = this.calcularCuartiles(1)
+    
   }
 
   agregarValores(valor?) {
@@ -415,5 +415,31 @@ minimo=0;
     },
   ];
   public scatterChartType2: ChartType = 'scatter';
+  //calcular cuartiles
+  calcularCuartiles(numCuartil: number) {
+    let posicionQ1 = (numCuartil * this.sumatoria) / 4;
+    let rangoPosicion = [];
+    let posicionLi_Ls: number;
+
+    this.frecuenciaInterAcumulada.forEach(element => {
+      if( posicionQ1 == element ) {
+        rangoPosicion[0] = element;
+        posicionLi_Ls = this.frecuenciaInterAcumulada.indexOf(rangoPosicion[0]);
+        return this.intervaloSuperior[posicionLi_Ls];
+      }
+    });
+    if( rangoPosicion.length == 0 ) {
+      let result = this.frecuenciaInterAcumulada.filter(elemento => elemento < posicionQ1);
+      let result2 = this.frecuenciaInterAcumulada.filter(elemento => elemento > posicionQ1);
+      rangoPosicion[0] = result[result.length-1]
+      rangoPosicion[1] = result2[0]
+      posicionLi_Ls = this.frecuenciaInterAcumulada.indexOf(rangoPosicion[1]);
+
+      let Li = this.intervaloInferior[posicionLi_Ls];
+      let Ls= this.intervaloSuperior[posicionLi_Ls];
+
+      return Li + ((Ls -Li) * ( ( posicionQ1 - rangoPosicion[0]) / (rangoPosicion[1] - rangoPosicion[0]) ));
+    }
+  }
 
 }
