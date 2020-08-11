@@ -85,6 +85,7 @@
               <th>100%</th>
             </tr>
           </tbody>
+
         </table>
         <table class="table" *ngIf="sumatoria >= 20">
           <thead class="thead-dark">
@@ -136,6 +137,26 @@
             <td scope="row" *ngIf="modaMayor==0">No hay Moda</td>
             <td scope="row" *ngIf="modaMayor>=1">{{moda}}</td>
           </tr>
+          <tr>
+            <td colspan="3">
+              <div class="btn-group-vertical col-12">
+                <button type="button" class="btn btn-warning  col-12" data-toggle="modal" 
+                data-target=".bd-example-modal-lg">
+                  Ver Grafica de Pastel
+              </button>
+              <button type="button" class="btn btn-secondary col-md" data-toggle="modal" 
+                data-target=".bd-example-modal-lg2">
+                  Ver Grafica de Barras
+              </button>
+              
+              <button type="button" class="btn btn-primary  col-md" data-toggle="modal" 
+              data-target=".bd-example-modal-lg3">
+              Ver Grafica de Puntos
+              </button>
+              </div>
+             
+            </td>
+                      </tr>
         </table>
         <table align="left" class="table col-md-6 border" *ngIf="sumatoria >= 20">
           <tr class="static text-center">
@@ -170,10 +191,30 @@
             <th scope="row" class="bg-primary text-white">Quartil 3</th>
           </tr>
           <tr class="static text-center">
-            <td scope="row"></td>
-            <td scope="row"></td>
-            <td scope="row"></td>
+            <td scope="row">0</td>
+            <td scope="row">0</td>
+            <td scope="row">0</td>
           </tr>
+          <tr>
+<td colspan="3">
+  <div class="btn-group-vertical col-12">
+    <button type="button" class="btn btn-warning  col-md" data-toggle="modal" 
+    data-target=".bd-example-modal-lg">
+      Ver Grafica de Pastel
+  </button>
+  <button type="button" class="btn btn-secondary  col-md" data-toggle="modal" 
+    data-target=".bd-example-modal-lg2">
+      Ver Grafica de Barras
+  </button>
+    <button type="button" class="btn btn-primary col-12" data-toggle="modal" 
+    data-target=".bd-example-modal-lg4">
+    Ver Grafica de Puntos
+    </button>
+  </div>
+ 
+</td>
+          </tr>
+          
         </table>
         
 
@@ -182,19 +223,8 @@
       </div>
       <div class="row mb-5">
         <div class="col-md-2"></div>
-        <button type="button" class="btn btn-warning m-2 col-md" data-toggle="modal" 
-          data-target=".bd-example-modal-lg">
-            Ver Grafica de Pastel
-        </button>
-        <button type="button" class="btn btn-secondary m-2 col-md" data-toggle="modal" 
-          data-target=".bd-example-modal-lg2">
-            Ver Grafica de Barras
-        </button>
 
-        <button type="button" class="btn btn-primary m-2 col-md" data-toggle="modal" 
-        data-target=".bd-example-modal-lg3">
-        Ver Grafica de Puntos
-        </button>
+        
         <div class="col-md-2"></div>
       </div>
     </div>
@@ -273,6 +303,31 @@
   </div>
 </div>
 
+<div class="modal fade bd-example-modal-lg4" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" align="center">
+        <h5 class="modal-title" id="exampleModalLabel" >Diagrama de Puntos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="scatterChartData2"
+            [options]="scatterChartOptions2"
+            [labels]="scatterChartLabels2"
+            [chartType]="scatterChartType2">
+          </canvas>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+
+</div>
 <!-- Modal -->
 <div class="modal fade" id="modalImagen" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">

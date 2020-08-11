@@ -30,7 +30,7 @@ export class DataTableComponent implements OnInit {
   moda = [];
   modaMayor = 0;
   diagramadepuntos = [];
-
+  diagramadepuntos2 = [];
   barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -132,17 +132,17 @@ minimo=0;
   }
 
   calcularTabla(value) {
-    this.maximo=Math.max.apply(null, this.valoresSinDuplicados);
-    this.minimo=Math.min.apply(null, this.valoresSinDuplicados);
+
     //Ordenar Valores
     this.valores.sort((a, b) => a - b);
       
     //DatosSinRepetir
     const distinto = (value, indice, self) => {
       return self.indexOf(value) === indice;
-    };
+    }; 
     this.valoresSinDuplicados = this.valores.filter(distinto);
-
+    this.maximo=Math.max.apply(null, this.valoresSinDuplicados);
+    this.minimo=Math.min.apply(null, this.valoresSinDuplicados);
     //Frecuencia
     this.diagramadepuntos = [];
     for (let i = 0; i < this.valoresSinDuplicados.length; i++) {
@@ -272,12 +272,14 @@ minimo=0;
       }
       this.frecuenciaIntervalos = [];
       //Frecuencia intervalos
+      this.diagramadepuntos2 = [];
       this.cont = 0;
       for (let i = 0; i < this.intervaloInferior.length; i++) {
         this.cont = 0;
         for (let j = 0; j < this.valoresSinOrden.length; j++) {
           if (this.valoresSinOrden[j].Dato >= this.intervaloInferior[i] && this.valoresSinOrden[j].Dato < this.intervaloSuperior[i]) {
             this.frecuenciaIntervalos[i] = this.cont += 1;
+            this.diagramadepuntos2.push({ x: [i+1], y: this.cont },);
           } else if (this.frecuenciaIntervalos[i] === undefined) {
             this.frecuenciaIntervalos[i] = 0;
           }
@@ -330,6 +332,12 @@ minimo=0;
     this.scatterChartLabels = this.valoresSinDuplicados;
       this.scatterChartData = [
         { data: this.diagramadepuntos, label: 'frecuencia', pointRadius: 10},
+        
+      ];
+//diagrama de puntos en intervalos
+      this.scatterChartLabels2 = this.intervaloInferior;
+      this.scatterChartData2 = [
+        { data: this.diagramadepuntos2, label: 'frecuencia - intervalos', pointRadius: 10},
         
       ];
   }
@@ -389,5 +397,23 @@ minimo=0;
   ];
   
   public scatterChartType: ChartType = 'scatter';
+
+
+
+  //PUNTOS EN INTERVALOS
+  public scatterChartOptions2: ChartOptions = {
+    responsive: true,
+  };
+  public scatterChartLabels2: Label[] = ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'];
+
+  public scatterChartData2: ChartDataSets[] = [
+    {
+      data: [
+      ],
+      label: 'Series A',
+      pointRadius: 10,
+    },
+  ];
+  public scatterChartType2: ChartType = 'scatter';
 
 }
