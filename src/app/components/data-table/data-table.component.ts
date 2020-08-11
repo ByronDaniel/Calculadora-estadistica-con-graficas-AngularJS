@@ -125,6 +125,7 @@ export class DataTableComponent implements OnInit {
   
     };
     reader.readAsBinaryString(target.files[0]);
+    
   }
 
   calcularTabla(value) {
@@ -341,6 +342,7 @@ export class DataTableComponent implements OnInit {
     this.Q1 = this.calcularCuartiles(1)
     
   }
+  
 
   agregarValores(valor?) {
     if (valor.value != "") {

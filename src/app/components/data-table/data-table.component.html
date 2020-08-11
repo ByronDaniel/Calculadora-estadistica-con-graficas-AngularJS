@@ -160,43 +160,57 @@
         </table>
         <table align="left" class="table col-md-6 border" *ngIf="sumatoria >= 20">
           <tr class="static text-center">
+            <th scope="row" class="bg-primary text-white"></th>
             <th scope="row" class="bg-primary text-white">Rango</th>
             <th scope="row" class="bg-primary text-white">Clase</th>
             <th scope="row" class="bg-primary text-white">Amplitud</th>
+            <th scope="row" class="bg-primary text-white"></th>
           </tr>
           <tr class="static text-center">
+            <th scope="row" ></th>
             <td scope="row">{{maximo}} - {{minimo}} =</td>
             <td scope="row">1 + 3.332 * log({{sumatoria}}) =</td>
             <td scope="row">{{rango}} / {{clase}} =</td>
+            <th scope="row" ></th>
           </tr>
           <tr class="static text-center">
+            <th scope="row" ></th>
             <td scope="row">{{rango}}</td>
             <td scope="row">{{clase}}</td>
             <td scope="row">{{amplitud| number:'1.2-2'}}</td>
+            <th scope="row" ></th>
           </tr>
           <tr class="static text-center">
+            <th scope="row" class="bg-primary text-white"></th>
             <th scope="row" class="bg-primary text-white">Media</th>
             <th scope="row" class="bg-primary text-white">Mediana</th>
             <th scope="row" class="bg-primary text-white">Moda</th>
+            <th scope="row" class="bg-primary text-white"></th>
           </tr>
           <tr class="static text-center">
+            <th scope="row" ></th>
             <td scope="row">{{media| number:'1.2-2'}}</td>
             <td scope="row"></td>
             <td scope="row" *ngIf="modaMayor==0">No hay Moda</td>
             <td scope="row" *ngIf="modaMayor>=1">{{moda}}</td>
+            <th scope="row" ></th>
           </tr>
           <tr class="static text-center">
-            <th scope="row" class="bg-primary text-white">Quartil 1</th>
-            <th scope="row" class="bg-primary text-white">Quartil 2</th>
-            <th scope="row" class="bg-primary text-white">Quartil 3</th>
+            <th scope="row" class="bg-primary text-white">Min</th>
+            <th scope="row" class="bg-primary text-white">Q1</th>
+            <th scope="row" class="bg-primary text-white">Q2</th>
+            <th scope="row" class="bg-primary text-white">Q3</th>
+            <th scope="row" class="bg-primary text-white">Max</th>
           </tr>
           <tr class="static text-center">
+            <td scope="row">{{ minimo}}</td>
             <td scope="row">{{ Q1 | number:'1.2-2' }}</td>
             <td scope="row">{{ Q2 | number:'1.2-2' }}</td>
             <td scope="row">{{ Q3 | number:'1.2-2' }}</td>
+            <td scope="row">{{ maximo}}</td>
           </tr>
           <tr>
-<td colspan="3">
+<td colspan="5">
   <div class="btn-group-vertical col-12">
     <button type="button" class="btn btn-warning  col-md" data-toggle="modal" 
     data-target=".bd-example-modal-lg">
