@@ -135,8 +135,8 @@
           <tr class="static text-center">
             <td scope="row">{{media| number:'1.2-2'}}</td>
             <td scope="row">{{datomediana}}</td>
-            <td scope="row" *ngIf="modaMayor==0">No hay Moda</td>
-            <td scope="row" *ngIf="modaMayor>=1">{{moda}}</td>
+            <td scope="row" *ngIf="modaMayor==1">No hay Moda</td>
+            <td scope="row" *ngIf="modaMayor!=1">{{moda}}</td>
           </tr>
           <tr>
             <td colspan="3">
@@ -169,13 +169,6 @@
           </tr>
           <tr class="static text-center">
             <th scope="row"></th>
-            <td scope="row">{{maximo}} - {{minimo}} =</td>
-            <td scope="row">1 + 3.332 * log({{sumatoria}}) =</td>
-            <td scope="row">{{rango}} / {{clase}} =</td>
-            <th scope="row"></th>
-          </tr>
-          <tr class="static text-center">
-            <th scope="row"></th>
             <td scope="row">{{rango}}</td>
             <td scope="row">{{clase}}</td>
             <td scope="row">{{amplitud| number:'1.2-2'}}</td>
@@ -191,9 +184,9 @@
           <tr class="static text-center">
             <th scope="row"></th>
             <td scope="row">{{media| number:'1.2-2'}}</td>
-            <td scope="row"></td>
-            <td scope="row" *ngIf="modaMayor==0">No hay Moda</td>
-            <td scope="row" *ngIf="modaMayor>=1">{{moda}}</td>
+            <td scope="row">{{ Q2 | number:'1.2-2' }}</td>
+            <td scope="row" *ngIf="modaMayor==1">No hay Moda</td>
+            <td scope="row" *ngIf="modaMayor!=1">{{moda}}</td>
             <th scope="row"></th>
           </tr>
           <tr class="static text-center">

@@ -510,6 +510,8 @@ export class DataTableComponent implements OnInit {
 
       return Li + ((Ls -Li) * ( ( posicionQ1 - rangoPosicion[0]) / (rangoPosicion[1] - rangoPosicion[0]) ));
     }
+    
   }
+  
 
 }
