@@ -290,22 +290,27 @@ export class DataTableComponent implements OnInit {
       }
       //Frecuencia Relativa Mayor 20
 
-      for (let i = 0; i < this.valoresSinDuplicados.length; i++) {
+    /*  for (let i = 0; i < this.valoresSinDuplicados.length; i++) {
         this.cont = 0;
         for (let j = 0; j < this.valoresSinOrden.length; j++) {
+          debugger
           if (this.valoresSinDuplicados[i] == this.valoresSinOrden[j].Dato) {
 
             this.frecuenciarelativaMayor20[i] = (Number(this.frecuenciaIntervalos[i] / this.sumatoria));
 
           }
         }
-    }
+    }*/
+    this.frecuenciarelativaMayor20 = [];
+    this.frecuenciaIntervalos.forEach(element => {
+      this.frecuenciarelativaMayor20.push(Number(element / this.sumatoria));
+    });
 
     //Frecuencia Porcentual > 20
 
     this.frecuenciaporcentualMayor20 = [];
     this.frecuenciaporcentualMayor20[0] = this.frecuenciarelativaMayor20[0];
-
+    /*
       for (let i = 0; i < this.valoresSinDuplicados.length; i++) {
         this.cont = 0;
         for (let j = 0; j < this.valoresSinOrden.length; j++) {
@@ -316,6 +321,11 @@ export class DataTableComponent implements OnInit {
           }
         }
       }
+    */
+      this.frecuenciaporcentualMayor20 = [];
+      this.frecuenciaIntervalos.forEach(element => {
+        this.frecuenciaporcentualMayor20.push(Number((element * 100)/ this.sumatoria));
+      });
 
     //frecuencia Intervalo acumulada
     this.frecuenciaInterAcumulada = [];
@@ -326,12 +336,15 @@ export class DataTableComponent implements OnInit {
       this.frecuenciaInterAcumulada[i] = this.frecuenciaInterAcumulada[i - 1] + this.frecuenciaIntervalos[i];
     }
 
+    this.diagramadepuntos.push(0);
     this.scatterChartLabels = this.valoresSinDuplicados;
       this.scatterChartData = [
         { data: this.diagramadepuntos, label: 'frecuencia', pointRadius: 10},
         
       ];
-//diagrama de puntos en intervalos
+    
+    //diagrama de puntos en intervalos
+    this.diagramadepuntos2.push(0);
       this.scatterChartLabels2 = this.intervaloInferior;
       this.scatterChartData2 = [
         { data: this.diagramadepuntos2, label: 'frecuencia - intervalos', pointRadius: 10},
@@ -340,7 +353,7 @@ export class DataTableComponent implements OnInit {
     
     //Calculo Cuartiles
     this.Q1 = this.calcularCuartiles(1);
-    this.Q2 = this.cuartilQ3(2);
+    this.Q2 = this.cuartilQ2(2);
     
   }
   
@@ -418,6 +431,7 @@ export class DataTableComponent implements OnInit {
     },
   ];
   public scatterChartType2: ChartType = 'scatter';
+  
   //calcular cuartiles
   calcularCuartiles(numCuartil: number) {
     let posicionQ1 = (numCuartil * this.sumatoria) / 4;
@@ -445,7 +459,7 @@ export class DataTableComponent implements OnInit {
     }
   }
 
-  cuartilQ3(numCuartil: number) {
+  cuartilQ2(numCuartil: number) {
     let posicionQ1 = (numCuartil * this.sumatoria) / 4;
     let rangoPosicion = [];
     let posicionLi_Ls: number;
