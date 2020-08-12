@@ -340,7 +340,7 @@ export class DataTableComponent implements OnInit {
     
     //Calculo Cuartiles
     this.Q1 = this.calcularCuartiles(1);
-    this.Q2 = this.cuartilQ3(2);
+    this.Q3 = this.cuartilQ3(3);
     
   }
   
