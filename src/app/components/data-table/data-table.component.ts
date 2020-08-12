@@ -339,7 +339,8 @@ export class DataTableComponent implements OnInit {
       ];
     
     //Calculo Cuartiles
-    this.Q1 = this.calcularCuartiles(1)
+    this.Q1 = this.calcularCuartiles(1);
+    this.Q2 = this.cuartilQ3(2);
     
   }
   
@@ -419,6 +420,32 @@ export class DataTableComponent implements OnInit {
   public scatterChartType2: ChartType = 'scatter';
   //calcular cuartiles
   calcularCuartiles(numCuartil: number) {
+    let posicionQ1 = (numCuartil * this.sumatoria) / 4;
+    let rangoPosicion = [];
+    let posicionLi_Ls: number;
+
+    this.frecuenciaInterAcumulada.forEach(element => {
+      if( posicionQ1 == element ) {
+        rangoPosicion[0] = element;
+        posicionLi_Ls = this.frecuenciaInterAcumulada.indexOf(rangoPosicion[0]);
+        return this.intervaloSuperior[posicionLi_Ls];
+      }
+    });
+    if( rangoPosicion.length == 0 ) {
+      let result = this.frecuenciaInterAcumulada.filter(elemento => elemento < posicionQ1);
+      let result2 = this.frecuenciaInterAcumulada.filter(elemento => elemento > posicionQ1);
+      rangoPosicion[0] = result[result.length-1]
+      rangoPosicion[1] = result2[0]
+      posicionLi_Ls = this.frecuenciaInterAcumulada.indexOf(rangoPosicion[1]);
+
+      let Li = this.intervaloInferior[posicionLi_Ls];
+      let Ls= this.intervaloSuperior[posicionLi_Ls];
+
+      return Li + ((Ls -Li) * ( ( posicionQ1 - rangoPosicion[0]) / (rangoPosicion[1] - rangoPosicion[0]) ));
+    }
+  }
+
+  cuartilQ3(numCuartil: number) {
     let posicionQ1 = (numCuartil * this.sumatoria) / 4;
     let rangoPosicion = [];
     let posicionLi_Ls: number;
