@@ -90,6 +90,10 @@ export class DataTableComponent implements OnInit {
   Q2: number = 0;
   Q3: number = 0;
 
+  anchoQ1=0;
+  anchoQ2=0;
+  anchoQ3=0;
+  anchoMax=0;
   constructor( private exportService: ExcelService ) { }
 
   ngOnInit(): void {
@@ -355,8 +359,10 @@ export class DataTableComponent implements OnInit {
     this.Q1 = this.calcularCuartiles(1);
     this.Q2 = this.cuartilQ2(2)
     this.Q3 = this.cuartilQ3(3);
-    
-
+    this.anchoQ1=this.Q1-this.minimo;
+    this.anchoQ2=this.Q2-this.Q1;
+    this.anchoQ3=this.Q3-this.Q2;
+    this.anchoMax=this.maximo-this.Q3;
   }
   
 

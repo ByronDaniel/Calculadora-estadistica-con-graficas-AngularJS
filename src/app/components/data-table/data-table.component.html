@@ -81,7 +81,7 @@
               <th scope="row">Total</th>
               <th>-</th>
               <th>{{sumatoria}}</th>
-              <th>-</th>
+              <th>{{sumatoria}}</th>
               <th>1</th>
               <th>100%</th>
             </tr>
@@ -117,7 +117,7 @@
               <th>-</th>
               <th>-</th>
               <th>{{sumatoria}}</th>
-              <th>-</th>
+              <th>{{sumatoria}}</th>
               <th>1</th>
               <th>100%</th>
             </tr>
@@ -202,6 +202,16 @@
             <td scope="row">{{ Q2 | number:'1.2-2' }}</td>
             <td scope="row">{{ Q3 | number:'1.2-2' }}</td>
             <td scope="row">{{ maximo}}</td>
+          </tr>
+          <tr class="static text-center">
+            <th scope="row" colspan="5" class="bg-primary text-white">Anchos</th>
+          </tr>
+          <tr class="static text-center">
+            <td scope="row">{{minimo}}</td>
+            <td scope="row">{{anchoQ1 | number:'1.2-2'}}</td>
+            <td scope="row">{{anchoQ2 | number:'1.2-2'}}</td>
+            <td scope="row">{{anchoQ3 | number:'1.2-2'}}</td>
+            <td scope="row">{{anchoMax | number:'1.2-2'}}</td>
           </tr>
           <tr>
             <td colspan="5">
