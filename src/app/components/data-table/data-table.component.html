@@ -143,16 +143,16 @@
               <div class="btn-group-vertical col-12">
                 <button type="button" class="btn btn-warning  col-12" data-toggle="modal"
                   data-target=".bd-example-modal-lg">
-                  Ver Grafica de Pastel
+                  Ver Diagrama de Pastel
                 </button>
                 <button type="button" class="btn btn-secondary col-md" data-toggle="modal"
                   data-target=".bd-example-modal-lg2">
-                  Ver Grafica de Barras
+                  Ver Diagrama de Barras
                 </button>
 
                 <button type="button" class="btn btn-primary  col-md" data-toggle="modal"
                   data-target=".bd-example-modal-lg3">
-                  Ver Grafica de Puntos
+                  Ver Diagrama de Puntos
                 </button>
               </div>
 
@@ -218,25 +218,26 @@
               <div class="btn-group-vertical col-12">
                 <button type="button" class="btn btn-warning  col-md" data-toggle="modal"
                   data-target=".bd-example-modal-lg">
-                  Ver Grafica de Pastel
+                  Ver Diagrama de Pastel
                 </button>
                 <button type="button" class="btn btn-secondary  col-md" data-toggle="modal"
                   data-target=".bd-example-modal-lg2">
-                  Ver Grafica de Barras
+                  Ver Diagrama de Barras
                 </button>
                 <button type="button" class="btn btn-primary col-12" data-toggle="modal"
                   data-target=".bd-example-modal-lg4">
-                  Ver Grafica de Puntos
+                  Ver Diagrama de Puntos
                 </button>
+                <button type="button" class="btn btn-danger col-12" (click)="ngAfterViewInit()" data-toggle="modal" data-target=".bd-example-modal-lg5">
+                Ver Diagrama de Bigotes
+              </button>
               </div>
 
             </td>
           </tr>
 
         </table>
-
-
-
+        
         <div class="col-md-3"></div>
       </div>
       <div class="row mb-5">
@@ -257,7 +258,7 @@
 
     <div class="modal-content">
       <div class="modal-header" align="center">
-        <h5 class="modal-title" id="exampleModalLabel">Grafica de Pastel</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Diagrama de Pastel</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -276,7 +277,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header" align="center">
-        <h5 class="modal-title" id="exampleModalLabel">Grafica de Barras</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Diagrama de Barras</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -341,6 +342,41 @@
     </div>
   </div>
 </div>
+<div class="modal fade bd-example-modal-lg5" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" >
+      <div class="modal-header" align="center">
+        <h5 class="modal-title" id="exampleModalLabel">Cuartiles</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <table>
+        <tr class="static text-center">
+          <th scope="row" class="bg-primary text-white">Min</th>
+          <th scope="row" class="bg-primary text-white">Q1</th>
+          <th scope="row" class="bg-primary text-white">Q2</th>
+          <th scope="row" class="bg-primary text-white">Q3</th>
+          <th scope="row" class="bg-primary text-white">Max</th>
+        </tr>
+        <tr class="static text-center">
+          <td scope="row">{{ minimo}}</td>
+          <td scope="row">{{ Q1 | number:'1.2-2' }}</td>
+          <td scope="row">{{ Q2 | number:'1.2-2' }}</td>
+          <td scope="row">{{ Q3 | number:'1.2-2' }}</td>
+          <td scope="row">{{ maximo}}</td>
+        </tr>
+      </table>
+      
+<div align="center">
+  <div id="chartdiv" style="width: 200px; height: 650px;"></div>
+</div>
+      
+    </div>
+  </div>
+</div>
+
 <div>
 
 </div>

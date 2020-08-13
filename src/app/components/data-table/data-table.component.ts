@@ -1,19 +1,25 @@
 import { ExcelService } from './../../services/excel.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { Label } from 'ng2-charts';
 import { ChartType, ChartDataSets, ChartOptions } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { empty } from 'rxjs';
-declare var $: any;
 
+import * as am4core from "@amcharts/amcharts4/core";
+import * as am4charts from "@amcharts/amcharts4/charts";
+import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+
+
+declare var $: any;
+declare var chart: any;
+am4core.useTheme(am4themes_animated);
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css']
 })
 export class DataTableComponent implements OnInit {
-  
   @Input() valoresSinOrden = [];
   frecuencia = [];
   cont = 0;
@@ -94,7 +100,89 @@ export class DataTableComponent implements OnInit {
   anchoQ2=0;
   anchoQ3=0;
   anchoMax=0;
-  constructor( private exportService: ExcelService ) { }
+  constructor( private exportService: ExcelService, private zone: NgZone ) {
+  
+   }
+
+ngAfterViewInit(){
+let chart = am4core.create("chartdiv", am4charts.XYChart);
+chart.paddingRight = 20;
+
+
+
+let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+/* dateAxis.renderer.minGridDistance = 40;
+dateAxis.renderer.grid.template.location = 0; */
+dateAxis.tooltip.disabled = true;
+dateAxis.fillOpacity=0;
+
+
+
+let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+valueAxis.tooltip.disabled = true;
+
+let series = chart.series.push(new am4charts.CandlestickSeries());
+series.dataFields.dateX = "date";
+series.dataFields.valueY = "close";
+series.dataFields.openValueY = "open";
+series.dataFields.lowValueY = "low";
+series.dataFields.highValueY = "high";
+series.simplifiedProcessing = true;
+series.tooltipText = "Max:{highValueY.value}\nQ3:{valueY.value}\nQ2:{mediana}\nQ1:{openValueY.value}\nMin:{lowValueY.value}";
+series.riseFromOpenState = undefined;
+series.dropFromOpenState = undefined;
+
+chart.cursor = new am4charts.XYCursor();
+
+let medianaSeries = chart.series.push(new am4charts.StepLineSeries());
+medianaSeries.noRisers = true;
+medianaSeries.startLocation = 0.1;
+medianaSeries.endLocation = 0.9;
+medianaSeries.dataFields.valueY = "mediana";
+medianaSeries.dataFields.dateX = "date";
+medianaSeries.strokeWidth = 2;
+medianaSeries.stroke = am4core.color("#fff");
+
+
+let topSeries = chart.series.push(new am4charts.StepLineSeries());
+topSeries.noRisers = true;
+topSeries.startLocation = 0.2;
+topSeries.endLocation = 0.8;
+topSeries.dataFields.valueY = "high";
+topSeries.dataFields.dateX = "date";
+topSeries.stroke = chart.colors.getIndex(0);
+topSeries.strokeWidth = 2;
+
+let bottomSeries = chart.series.push(new am4charts.StepLineSeries());
+bottomSeries.noRisers = true;
+bottomSeries.startLocation = 0.2;
+bottomSeries.endLocation = 0.8;
+bottomSeries.dataFields.valueY = "low";
+bottomSeries.dataFields.dateX = "date";
+bottomSeries.stroke = chart.colors.getIndex(0);
+bottomSeries.strokeWidth = 2;
+
+
+
+chart.data = [ {
+    "date": "2019-08-01",
+    "open": this.Q1,
+    "high": this.maximo,
+    "low": this.minimo ,
+    "close": this.Q3
+  }];
+
+    for(var i = 0; i < chart.data.length; i++){
+      let dataItem = chart.data[i];
+      dataItem.mediana = this.Q2;
+    }
+  }
+
+  
+  
+
+
+
 
   ngOnInit(): void {
   }
